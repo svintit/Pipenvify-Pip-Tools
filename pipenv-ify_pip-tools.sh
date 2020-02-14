@@ -11,18 +11,25 @@ FIRE="\xF0\x9F\x94\xA5"
 HUNDRED="\xF0\x9F\x92\xAF"
 OK="\xF0\x9F\x91\x8C"
 MONKEY="\xF0\x9F\x99\x8A"
+ROCKET="\xF0\x9F\x9A\x80"
 
-function compile_and_sync {
-    # Check if requirements.txt exists
-    if [ ! -f requirements.txt ]; then
-        printf "\n ${THUMB_DOWN} --> No \"requirements.txt\" found - Compiling hashes to \"requirements.txt\" "
-
+function compile_requirements {
         # Compile requirements.in to requirements.txt with hashes
         pip-compile --quiet \
             --generate-hashes \
             --output-file=requirements.txt \
             requirements.in
+}
+
+function compile_and_sync {
+    # Check if requirements.txt exists
+    if [ ! -f requirements.txt ]; then
+        printf "\n ${THUMB_DOWN} --> No \"requirements.txt\" found - Compiling hashes to \"requirements.txt\" "
+    else
+        printf "\n ${ROCKET} --> \"requirements.txt\" found - Updating compiled hashes "
     fi
+
+    compile_requirements
 
     printf "\n ${FIRE} --> Syncing requirements.txt with virtual environment \n\n"
 
