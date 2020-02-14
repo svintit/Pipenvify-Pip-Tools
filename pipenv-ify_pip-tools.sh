@@ -15,7 +15,7 @@ MONKEY="\xF0\x9F\x99\x8A"
 function compile_and_sync {
     # Check if requirements.txt exists
     if [ ! -f requirements.txt ]; then
-        printf " ${THUMB_DOWN} --> No \"requirements.txt\" found - Compiling hashes to \"requirements.txt\" "
+        printf "\n ${THUMB_DOWN} --> No \"requirements.txt\" found - Compiling hashes to \"requirements.txt\" "
 
         # Compile requirements.in to requirements.txt with hashes
         pip-compile --quiet \
